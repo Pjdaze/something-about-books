@@ -9,7 +9,7 @@ export const ThemeToggle: React.FC = () => {
     <button
       onClick={toggleTheme}
       className={`
-        p-2 rounded-full text-gray-800 dark:text-yellow-400 
+        p-2 rounded-full text-gray-800 
         hover:bg-gray-200 dark:hover:bg-gray-700 transition
       `}
       aria-label="Toggle Dark Mode"

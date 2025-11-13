@@ -18,8 +18,7 @@ export const BookshelfPage = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-7xl">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-cyan-400">
-        {/* Using 'books.length' */}
+      <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">
         {`You've Got ${books.length} ${
           books.length !== 1 ? "Books" : "Book"
         } in your Bookshelf`}
@@ -35,13 +34,11 @@ export const BookshelfPage = () => {
           </p>
         </div>
       ) : (
-        // Book Grid
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {books.map((book) => (
             <BookCard
               key={book.key}
               book={book}
-              // Pass the handler that opens the modal with the current book's key
               onViewDetails={() => handleViewDetails(book)}
             />
           ))}
