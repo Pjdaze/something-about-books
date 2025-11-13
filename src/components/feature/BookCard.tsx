@@ -21,7 +21,7 @@ export const BookCard = ({ book, onViewDetails }: BookCardProps) => {
   return (
     <div
       onClick={onViewDetails}
-      className="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transition transform hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+      className=" dark:bg-gray-200  rounded-lg shadow-md overflow-hidden transition transform hover:shadow-xl hover:scale-[1.02] cursor-pointer"
     >
       <div className="flex p-4 h-full">
         {/* Cover Image */}
@@ -36,7 +36,6 @@ export const BookCard = ({ book, onViewDetails }: BookCardProps) => {
 
         <div className="flex flex-col justify-between grow min-w-0">
           <div>
-            {/* Title, Author, Year */}
             <h3
               className="text-lg font-bold text-gray-900 line-clamp-2 mb-1"
               title={book.title}

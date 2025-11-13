@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, Link } from "react-router-dom";
 import { SearchPage } from "./pages/SearchPage";
 import { BookshelfPage } from "./pages/BookshelfPage";
+import { ThemeToggle } from "./components/ui/ThemeToggle";
 
 const AppHeader: React.FC = () => (
   <header className="bg-blue-600 text-white shadow-md">
@@ -8,6 +9,7 @@ const AppHeader: React.FC = () => (
       <div className="text-xl font-bold">📚 Book Explorer</div>
 
       <nav>
+        <ThemeToggle />
         <Link
           to="/"
           className="text-white hover:text-blue-200 transition duration-150 mr-6"
@@ -29,7 +31,7 @@ const App = () => {
   return (
     <div>
       <AppHeader />
-      <div className="min-h-screen bg-gray-50 pb-10">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 pb-10">
         <Routes>
           <Route path="/" element={<SearchPage />} />
           <Route path="/bookshelf" element={<BookshelfPage />} />{" "}
