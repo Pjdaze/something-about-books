@@ -1,14 +1,13 @@
-// src/context/BookshelfContext.tsx
-
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { type Book } from "../types/Book";
+import { loadBookshelf, saveBookshelf } from "../utils/localStorage";
 import {
   type BookshelfContextType,
   type BookshelfState,
 } from "../types/Bookshelf";
 
 const initialBookshelfState: BookshelfState = {
-  books: [],
+  books: loadBookshelf(),
 };
 
 export const BookshelfContext = createContext<BookshelfContextType | null>(
@@ -22,27 +21,26 @@ export const BookshelfProvider: React.FC<{ children: React.ReactNode }> = ({
     initialBookshelfState
   );
 
-  // --- Actions ---
+  useEffect(() => {
+    saveBookshelf(bookshelf.books);
+  }, [bookshelf.books]);
 
   const addBook = (book: Book) => {
     if (!bookshelf.books.some((b) => b.key === book.key)) {
       const updatedBooks = [...bookshelf.books, book];
       setBookshelf({ books: updatedBooks });
-      // saveBookshelf(updatedBooks); // For Bonus
     }
   };
 
   const removeBook = (bookKey: string) => {
     const updatedBooks = bookshelf.books.filter((b) => b.key !== bookKey);
     setBookshelf({ books: updatedBooks });
-    // saveBookshelf(updatedBooks); // For Bonus
   };
 
   const isBookOnShelf = (bookKey: string): boolean => {
     return bookshelf.books.some((b) => b.key === bookKey);
   };
 
-  // Memoize the context value to prevent unnecessary re-renders
   const contextValue: BookshelfContextType = {
     ...bookshelf,
     addBook,

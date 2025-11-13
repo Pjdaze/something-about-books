@@ -1,3 +1,4 @@
+
 export interface Book {
   key: string; 
   title: string;
@@ -5,10 +6,21 @@ export interface Book {
   first_publish_year?: number;
   cover_i?: number; 
 }
-// overall structure of the API response
+
 export interface OpenLibrarySearchResponse {
   numFound: number;
   start: number;
   numFoundExact: boolean;
   docs: Book[]; 
+}
+
+interface DetailedAuthor {
+    name: string; 
+}
+
+export interface DetailedBook {
+    title: string;
+    authors?: DetailedAuthor[]; 
+    subjects?: string[];
+    description: string | { type: string, value: string } | undefined;
 }

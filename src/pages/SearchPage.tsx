@@ -1,19 +1,22 @@
-// src/pages/SearchPage.tsx (Updates for Commit 5)
-
 import React, { useState } from "react";
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 import { Spinner } from "../components/ui/Spinner";
 
 import { searchBooks } from "../api/openLibrary";
+
+import { BookDetailsModal } from "../components/ui/BookDetailsModal";
 import { type Book } from "../types/Book";
 import { BookCard } from "../components/feature/BookCard";
+
 export const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
+
+  const [selectedBookKey, setSelectedBookKey] = useState<string | null>(null);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,33 +88,36 @@ export const SearchPage = () => {
             No results found for "{searchTerm}". Try a different query.
           </p>
         )}
-        happened
+
         {!loading && !error && !hasSearched && (
           <div className="text-center text-gray-500 py-10">
             Enter a query above to begin exploring books!
           </div>
         )}
-        {!loading && !error && books.length > 0 && (
-          <p className="text-gray-600 mb-4">
-            Found **{books.length}** relevant works.
-          </p>
-        )}
+
         {!loading && !error && books.length > 0 && (
           <div className="mt-8">
             <p className="text-gray-600 mb-4">
               Found **{books.length}** relevant works.
             </p>
 
-            {/* 💡 Responsive Grid Layout */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {books.map((book) => (
-                // Use a unique key for list rendering
-                <BookCard key={book.key} book={book} />
+                <BookCard
+                  key={book.key}
+                  book={book}
+                  onViewDetails={() => setSelectedBookKey(book.key)}
+                />
               ))}
             </div>
           </div>
         )}
       </div>
+
+      <BookDetailsModal
+        bookKey={selectedBookKey}
+        onClose={() => setSelectedBookKey(null)}
+      />
     </div>
   );
 };
