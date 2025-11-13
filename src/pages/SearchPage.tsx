@@ -7,7 +7,7 @@ import { Spinner } from "../components/ui/Spinner";
 
 import { searchBooks } from "../api/openLibrary";
 import { type Book } from "../types/Book";
-
+import { BookCard } from "../components/feature/BookCard";
 export const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
@@ -95,6 +95,21 @@ export const SearchPage = () => {
           <p className="text-gray-600 mb-4">
             Found **{books.length}** relevant works.
           </p>
+        )}
+        {!loading && !error && books.length > 0 && (
+          <div className="mt-8">
+            <p className="text-gray-600 mb-4">
+              Found **{books.length}** relevant works.
+            </p>
+
+            {/* 💡 Responsive Grid Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {books.map((book) => (
+                // Use a unique key for list rendering
+                <BookCard key={book.key} book={book} />
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </div>
