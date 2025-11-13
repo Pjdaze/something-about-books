@@ -1,6 +1,6 @@
 // src/context/BookshelfContext.tsx
 
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState } from "react";
 import { type Book } from "../types/Book";
 import {
   type BookshelfContextType,
@@ -11,7 +11,9 @@ const initialBookshelfState: BookshelfState = {
   books: [],
 };
 
-const BookshelfContext = createContext<BookshelfContextType | null>(null);
+export const BookshelfContext = createContext<BookshelfContextType | null>(
+  null
+);
 
 export const BookshelfProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -53,13 +55,4 @@ export const BookshelfProvider: React.FC<{ children: React.ReactNode }> = ({
       {children}
     </BookshelfContext.Provider>
   );
-};
-
-// Custom hook to consume the context easily
-export const useBookshelf = () => {
-  const context = useContext(BookshelfContext);
-  if (!context) {
-    throw new Error("useBookshelf must be used within a BookshelfProvider");
-  }
-  return context;
 };
