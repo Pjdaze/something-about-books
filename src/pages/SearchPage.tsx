@@ -41,8 +41,8 @@ export const SearchPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-7xl">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">
+    <div className="mx-auto p-4 max-w-7xl">
+      <h1 className="text-3xl font-bold mb-6 dark:text-gray-200 ">
         Open Library Book Explorer
       </h1>
 

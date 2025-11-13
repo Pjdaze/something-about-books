@@ -55,9 +55,8 @@ export const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 transform transition-all duration-300 scale-100 hover:scale-[1.01]"
+        className="relative w-full max-w-4xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 transform transition-all duration-300 scale-100 hover:scale-[1.01]"
       >
-        {/* Close button */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition"

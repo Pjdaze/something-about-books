@@ -1,75 +1,110 @@
-# React + TypeScript + Vite
+📚 **Open Library Book Explorer**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React + TypeScript application that allows users to search, explore, and manage books from the Open Library API. Users can search for books, view detailed information, and maintain a personal bookshelf that persists across sessions.
 
-Currently, two official plugins are available:
+**Key Features**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Search & Exploration
 
-## React Compiler
+Search Books: Search by title, author, or keyword.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Result View: View results showing Title, Author(s), First Publish Year, and Cover Image.
 
-Note: This will impact Vite dev & build performances.
+View Toggle: Easily switch between Grid and List view modes across the entire app.
 
-## Expanding the ESLint configuration
+2. Book Details
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Click the "Details" button on any book card to open a sleek, modern modal with detailed metadata:
+
+Title & Authors
+
+Subjects / Genres (rendered as clean tags)
+
+Description (if available)
+
+Handles loading states and API errors gracefully.
+
+3. Personal Bookshelf
+
+Persistence: Bookshelf state is managed via React Context and persisted locally using localStorage.
+
+Dedicated Page: A "My Bookshelf" page shows all saved books.
+
+Management: Easily add or remove books from your shelf using the toggle button.
+
+4. User Experience & Aesthetics
+
+Dark Mode: Full support for a modern dark/light theme toggle using Tailwind CSS dark: utilities.
+
+Responsive Layout: Fully responsive UI for optimal viewing on mobile, tablet, and desktop devices.
+
+⚙️ Tech Stack
+
+Frontend: React + TypeScript
+
+Styling: TailwindCSS (utility-first, responsive, and dark/light themes)
+
+Bundling: Vite (for fast development and build times)
+
+State Management: React Context (useBookshelf for core state, ViewModeContext for global layout)
+
+Persistence: Browser localStorage
+
+Data Source: Open Library API
+
+🚀 **Getting Started**
+
+To get the project running locally:
+
+# 1. Install dependencies
+
+npm install
+
+# or
+
+yarn install
+
+# 2. Run the development server
+
+npm run dev
+
+# or
+
+yarn dev
+
+Open http://localhost:5173 to view the app in your browser.
+
+📝 Developer Notes
+
+React + TypeScript + Vite Setup
+
+This project uses the standard Vite setup with React + TypeScript.
+
+ESLint Configuration
+
+The project is configured for strict, type-aware linting using recommended rulesets for a production-ready application structure.
+import reactX from "eslint-plugin-react-x";
+import reactDom from "eslint-plugin-react-dom";
+// eslint.config.js (Example structure)
+import { defineConfig, globalIgnores } from 'eslint-define-config';
+import tseslint from 'typescript-eslint';
 
 ```js
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(["dist"]),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
       tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
       tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
       tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
     ],
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
         tsconfigRootDir: import.meta.dirname,
       },
-      // other options...
     },
   },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+]);
 ```
