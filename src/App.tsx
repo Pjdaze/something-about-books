@@ -1,36 +1,13 @@
-import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { SearchPage } from "./pages/SearchPage";
 import { BookshelfPage } from "./pages/BookshelfPage";
-import { ThemeToggle } from "./components/ui/ThemeToggle";
 
-const AppHeader: React.FC = () => (
-  <header className="bg-blue-600 text-white shadow-md">
-    <div className="container mx-auto p-4 flex justify-between items-center max-w-7xl">
-      <div className="text-xl font-bold">📚 Book Explorer</div>
-
-      <nav>
-        <ThemeToggle />
-        <Link
-          to="/"
-          className="text-white hover:text-blue-200 transition duration-150 mr-6"
-        >
-          Search
-        </Link>
-        <Link
-          to="/bookshelf"
-          className="text-white hover:text-blue-200 transition duration-150 font-semibold"
-        >
-          My Bookshelf
-        </Link>
-      </nav>
-    </div>
-  </header>
-);
+import { Header } from "./components/ui/Header";
 
 const App = () => {
   return (
     <div>
-      <AppHeader />
+      <Header />
       <div className="min-h-screen bg-gray-50 dark:bg-slate-900 pb-10">
         <Routes>
           <Route path="/" element={<SearchPage />} />

@@ -8,14 +8,15 @@ import { searchBooks } from "../api/openLibrary";
 import { BookDetailsModal } from "../components/ui/BookDetailsModal";
 import { type Book } from "../types/Book";
 import { BookCard } from "../components/feature/BookCard";
+import { useViewMode } from "../context/ViewModeContext";
 
 export const SearchPage = () => {
+  const { viewMode, setViewMode } = useViewMode();
   const [searchTerm, setSearchTerm] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
-
   const [selectedBookKey, setSelectedBookKey] = useState<string | null>(null);
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -100,13 +101,41 @@ export const SearchPage = () => {
             <p className="text-gray-600 mb-4">
               Found **{books.length}** relevant works.
             </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="flex items-center justify-end mb-4 gap-2">
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`px-3 py-1 rounded ${
+                  viewMode === "grid"
+                    ? "bg-gray-800 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
+              >
+                Grid
+              </button>
+              <button
+                onClick={() => setViewMode("list")}
+                className={`px-3 py-1 rounded ${
+                  viewMode === "list"
+                    ? "bg-gray-800 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
+              >
+                List
+              </button>
+            </div>
+            <div
+              className={
+                viewMode === "grid"
+                  ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                  : "flex flex-col gap-4"
+              }
+            >
               {books.map((book) => (
                 <BookCard
                   key={book.key}
                   book={book}
                   onViewDetails={() => setSelectedBookKey(book.key)}
+                  viewMode={viewMode}
                 />
               ))}
             </div>

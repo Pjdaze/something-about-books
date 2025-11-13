@@ -8,9 +8,7 @@ a {
   text-decoration: inherit;
   text-decoration: none;
 }
-a:hover {
-  color: #535bf2;
-}
+
 
 body {
   margin: 0;
@@ -20,8 +18,4 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 

@@ -6,12 +6,17 @@ import { BookshelfToggle } from "./BookshelfToggle";
 interface BookCardProps {
   book: Book;
   onViewDetails: () => void;
+  viewMode?: "grid" | "list"; // new prop
 }
 
 const PLACEHOLDER_COVER =
   "https://via.placeholder.com/128x193.png?text=No+Cover";
 
-export const BookCard = ({ book, onViewDetails }: BookCardProps) => {
+export const BookCard = ({
+  book,
+  onViewDetails,
+  viewMode = "grid",
+}: BookCardProps) => {
   const coverUrl = book.cover_i
     ? getCoverImageUrl(book.cover_i, "M")
     : PLACEHOLDER_COVER;
@@ -21,15 +26,19 @@ export const BookCard = ({ book, onViewDetails }: BookCardProps) => {
   return (
     <div
       onClick={onViewDetails}
-      className=" dark:bg-gray-200  rounded-lg shadow-md overflow-hidden transition transform hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+      className={`dark:bg-gray-200 rounded-lg shadow-md overflow-hidden transition transform hover:shadow-xl hover:scale-[1.02] cursor-pointer ${
+        viewMode === "list" ? "flex" : ""
+      }`}
     >
-      <div className="flex p-4 h-full">
+      <div className={`flex p-4 h-full ${viewMode === "list" ? "gap-4" : ""}`}>
         {/* Cover Image */}
-        <div className="flex shrink-0 mr-4">
+        <div className={`flex shrink-0 ${viewMode === "list" ? "" : "mr-4"}`}>
           <img
             src={coverUrl}
             alt={`Cover for ${book.title}`}
-            className="w-24 h-36 object-cover rounded-md"
+            className={`object-cover rounded-md ${
+              viewMode === "list" ? "w-24 h-36" : "w-full h-48"
+            }`}
             loading="lazy"
           />
         </div>
