@@ -13,6 +13,7 @@ export const SearchPage = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ export const SearchPage = () => {
       );
     } finally {
       setLoading(false);
+      setHasSearched(true);
     }
   };
 
@@ -69,7 +71,6 @@ export const SearchPage = () => {
             <p className="ml-3">Searching the Open Library...</p>
           </div>
         )}
-
         {error && (
           <div
             className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
@@ -79,19 +80,17 @@ export const SearchPage = () => {
             <span className="block sm:inline ml-2">{error}</span>
           </div>
         )}
-
-        {!loading && !error && books.length === 0 && searchTerm.trim() && (
+        {!loading && !error && hasSearched && books.length === 0 && (
           <p className="text-gray-600 text-center py-10">
             No results found for "{searchTerm}". Try a different query.
           </p>
         )}
-
-        {!loading && !error && books.length === 0 && !searchTerm.trim() && (
+        happened
+        {!loading && !error && !hasSearched && (
           <div className="text-center text-gray-500 py-10">
             Enter a query above to begin exploring books!
           </div>
         )}
-
         {!loading && !error && books.length > 0 && (
           <p className="text-gray-600 mb-4">
             Found **{books.length}** relevant works.
