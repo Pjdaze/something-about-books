@@ -43,7 +43,7 @@ export const SearchPage = () => {
   return (
     <div className="mx-auto p-4 max-w-7xl">
       <h1 className="text-3xl font-bold mb-6 dark:text-gray-200 ">
-        Open Library Book Explorer
+        Find Books
       </h1>
 
       <form
@@ -99,7 +99,7 @@ export const SearchPage = () => {
         {!loading && !error && books.length > 0 && (
           <div className="mt-8">
             <p className="text-gray-600 mb-4">
-              Found **{books.length}** relevant works.
+              Found {books.length} relevant works.
             </p>
             <div className="flex items-center justify-end mb-4 gap-2">
               <button

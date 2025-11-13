@@ -11,7 +11,6 @@ interface BookCardProps {
 
 const PLACEHOLDER_COVER =
   "https://via.placeholder.com/128x193.png?text=No+Cover";
-
 export const BookCard = ({
   book,
   onViewDetails,
@@ -23,10 +22,21 @@ export const BookCard = ({
 
   const authors = book.author_name?.join(", ") || "Unknown Author";
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onViewDetails();
+    }
+  };
+
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={onViewDetails}
-      className={`dark:bg-gray-200 rounded-lg shadow-md overflow-hidden transition transform hover:shadow-xl hover:scale-[1.02] cursor-pointer ${
+      onKeyDown={handleKeyPress}
+      aria-label={`View details for "${book.title}" by ${authors}`}
+      className={`dark:bg-gray-200 rounded-lg shadow-md overflow-hidden transition transform hover:shadow-xl hover:scale-[1.02] cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 ${
         viewMode === "list" ? "flex" : ""
       }`}
     >
@@ -35,7 +45,7 @@ export const BookCard = ({
         <div className={`flex shrink-0 ${viewMode === "list" ? "" : "mr-4"}`}>
           <img
             src={coverUrl}
-            alt={`Cover for ${book.title}`}
+            alt={`Cover of ${book.title}`}
             className={`object-cover rounded-md ${
               viewMode === "list" ? "w-24 h-36" : "w-full h-48"
             }`}
