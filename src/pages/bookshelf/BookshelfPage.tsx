@@ -56,7 +56,7 @@ export const BookshelfPage = () => {
             onClick={() => setViewMode("grid")}
             className={`px-3 py-1 rounded ${
               viewMode === "grid"
-                ? "bg-transparent text-white shadow-lg"
+                ? "bg-transparent dark:text-white shadow-lg"
                 : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
           >
@@ -66,7 +66,7 @@ export const BookshelfPage = () => {
             onClick={() => setViewMode("list")}
             className={`px-3 py-1 rounded ${
               viewMode === "list"
-                ? "bg-transparent text-white shadow-lg"
+                ? "bg-transparent dark:text-white shadow-lg"
                 : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
           >
@@ -88,7 +88,7 @@ export const BookshelfPage = () => {
         <>
           {viewMode === "list" && (
             // List View uses existing BookCard component for list
-            <div className="flex flex-col gap-4">
+            <div className="flex lg:w-1/2 flex-col gap-4">
               {books.map((book) => (
                 <BookCard
                   key={book.key}

@@ -1,7 +1,6 @@
 .cb-root {
     --shelf-width: 80%;
     --shelf-max: 1000px;
-    margin-top: 50px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

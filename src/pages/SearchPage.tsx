@@ -41,14 +41,14 @@ export const SearchPage = () => {
   };
 
   return (
-    <div className="mx-auto p-4 max-w-7xl">
+    <div className="mx-auto p-4 max-w-5xl">
       <h1 className="text-3xl font-bold mb-6 dark:text-gray-200 ">
         Find Books
       </h1>
 
       <form
         onSubmit={handleSearch}
-        className="flex flex-col sm:flex-row gap-4 mb-8"
+        className="flex flex-col sm:flex-row  gap-4 mb-8"
       >
         <div className="flex grow">
           <Input

@@ -23,10 +23,11 @@ export const BookCard = ({
   return (
     <div
       className={`
-    dark:bg-transparent border-2 border-gray-200 dark:border-2 dark:border-slate-950 rounded-lg overflow-hidden transition: ;
+
+    dark:bg-transparent border border-gray-600  rounded-lg overflow-hidden transition: ;
     hover:shadow-lg hover:scale-[1.02]
     focus-within:ring-2 focus-within:ring-blue-500
-    ${viewMode === "list" ? "flex" : "flex flex-col h-[420px]"}
+    ${viewMode === "list" ? "flex border-0" : "flex flex-col h-[420px]"}
   `}
     >
       <div
