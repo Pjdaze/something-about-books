@@ -50,12 +50,12 @@ export const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4 transition-opacity duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black/50 backdrop-blur-md p-4 transition-opacity duration-300"
       onClick={handleOverlayClick}
     >
       <div
         ref={modalRef}
-        className="relative w-full max-w-4xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800 transform transition-all duration-300 scale-100 hover:scale-[1.01]"
+        className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-y-auto border border-gray-200 dark:border-gray-800 transform transition-all duration-300 scale-100 hover:scale-[1.01]"
       >
         <button
           onClick={onClose}

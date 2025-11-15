@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useBookshelf } from "../../hooks/useBookshelf";
 import { BookCard } from "../../components/feature/BookCard";
 import { BookDetailsModal } from "../../components/ui/BookDetailsModal";
@@ -13,15 +14,22 @@ export const BookshelfPage = () => {
   const { books, removeBook } = useBookshelf();
   const [selectedBookKey, setSelectedBookKey] = useState<string | null>(null);
   const { viewMode, setViewMode } = useViewMode();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const bookKeyFromUrl = searchParams.get("book");
+
+  useEffect(() => {
+    if (bookKeyFromUrl) setSelectedBookKey(bookKeyFromUrl);
+  }, [bookKeyFromUrl]);
 
   const handleViewDetails = (book: Book) => {
     setSelectedBookKey(book.key);
+    setSearchParams({ book: book.key });
   };
 
   const handleCloseDetails = () => {
     setSelectedBookKey(null);
+    setSearchParams({});
   };
-
   const handleRemove = (e: React.MouseEvent, bookKey: string) => {
     e.stopPropagation();
     removeBook(bookKey);
