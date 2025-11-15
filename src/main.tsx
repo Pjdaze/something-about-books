@@ -15,8 +15,6 @@ createRoot(document.getElementById("root")!).render(
       <ThemeProvider>
         <BookshelfProvider>
           <ViewModeProvider>
-            {" "}
-            {/* <-- wrap App with ViewModeProvider */}
             <App />
           </ViewModeProvider>
         </BookshelfProvider>

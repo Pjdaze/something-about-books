@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { SearchPage } from "./pages/SearchPage";
-import { BookshelfPage } from "./pages/BookshelfPage";
+import { BookshelfPage } from "./pages/bookshelf/BookshelfPage";
 
 import { Header } from "./components/ui/Header";
 

@@ -1,0 +1,233 @@
+.cb-root {
+    --shelf-width: 80%;
+    --shelf-max: 1000px;
+    margin-top: 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+    box-sizing: border-box;
+}
+
+.cb-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: var(--shelf-max);
+    padding: 0 1rem;
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+
+/* CONTAINER FOR MULTIPLE SHELVES */
+.cb-shelves-container {
+    width: 100%;
+    max-width: var(--shelf-max);
+    display: flex;
+    flex-direction: column-reverse;
+    /* Stack shelves from bottom up */
+    gap: 80px;
+    /* Vertical space between shelves */
+    padding-top: 90px;
+}
+
+/* INDIVIDUAL SHELF LAYER */
+.cb-shelf-layer {
+    width: var(--shelf-width);
+    max-width: var(--shelf-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 250px;
+
+}
+
+@media only screen and (max-width: 876px){
+
+.cb-shelf-layer {
+    padding-top: 10rem;
+}
+
+}
+
+@media only screen and (max-width: 643px) {
+
+    .cb-shelf-layer {
+        padding-top: 5rem;
+    }
+
+}
+
+.cb-bookshelf {
+    position: absolute;
+    /* Anchored to the bottom of the padded layer */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    border-bottom: 16px solid #f3f3f3;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    box-sizing: border-box;
+    pointer-events: all;
+    z-index: 2;
+}
+
+/* Bookshelf pseudo-elements (Front-side and Drop-shadow) */
+.cb-bookshelf::before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: -20px;
+    height: 26px;
+    width: calc(100% + 40px);
+    background: linear-gradient(90deg, #fafafa 0%, #fff 100%);
+    box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.05), 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.cb-bookshelf::after {
+    content: "";
+    position: absolute;
+    top: 42px;
+    left: -20px;
+    height: 20px;
+    width: calc(100% + 40px);
+    background: linear-gradient(180deg, #f3f3f3 0%, rgba(255, 255, 255, 0) 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 97% 100%, 3% 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* BOOK GRID - ALIGNED */
+.cb-books {
+    position: absolute;
+    /* Absolutely position the books */
+    bottom: 0px;
+    /* Anchor the bottom edge of the books to the shelf line */
+    left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    padding-bottom: 2px;
+    /* Small cushion space */
+    box-sizing: border-box;
+    z-index: 4;
+    /* Books are above the shelf elements */
+}
+
+
+
+/* BOOK ITSELF (Base Button) */
+.cb-book {
+    width: 100%;
+    position: relative;
+    border-radius: 3px 0.5px 0.5px 3px;
+    aspect-ratio: 115 / 180;
+    cursor: pointer;
+    overflow: visible;
+    transform-origin: center bottom;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+/* Book visual element (::before is the cover) */
+.cb-book::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 300ms cubic-bezier(.34, 1.56, .64, 1),
+        opacity 300ms ease-out;
+    background: var(--bg-image) center/cover no-repeat, #f3f3f3;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.18), inset 2px 0 2px 1px rgba(29, 27, 27, 0.12);
+    z-index: 2;
+    border-radius: 3px 0.5px 0.5px 3px;
+    pointer-events: none;
+}
+
+/* Book shadow (::after) */
+.cb-book::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 102%;
+    filter: blur(10px);
+    z-index: 1;
+    opacity: 1;
+    border-radius: 3px 0.5px 0.5px 3px;
+    transition: transform 300ms cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* HOVER EFFECT */
+.cb-book:hover::before,
+.cb-book:active::before {
+    transform: translateY(-45%) skew(3deg, -3deg) scale(1.35);
+    transition-duration: 600ms;
+}
+
+.cb-book:hover::after,
+.cb-book:active::after {
+    transform: translateY(-45%) skew(3deg, -3deg) scale(1.275);
+    transition-duration: 600ms;
+}
+
+.cb-book:nth-of-type(even):hover::before,
+.cb-book:nth-of-type(even):active::before {
+    transform: translateY(-45%) skew(-3deg, 3deg) scale(1.35);
+}
+
+.cb-book:nth-of-type(even):hover::after,
+.cb-book:nth-of-type(even):active::after {
+    transform: translateY(-45%) skew(-3deg, 3deg) scale(1.275);
+}
+
+.cb-book:focus {
+    outline: 3px solid rgba(99, 102, 241, 0.25);
+    outline-offset: 3px;
+}
+
+/* REMOVE BUTTON STYLES - to make it fit better... */
+.cb-remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    background-color: rgba(220, 38, 38, 0.9);
+    /* Red background */
+    color: white;
+    border: none;
+    border-radius: 0 3px 0 3px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    opacity: 0;
+    /* Hidden */
+    transition: opacity 200ms ease, background-color 200ms ease;
+    z-index: 5;
+}
+
+/* Show remove button on book hover */
+.cb-book:hover .cb-remove-btn {
+    opacity: 1;
+}
+
+.cb-remove-btn:hover {
+    background-color: rgba(185, 28, 28, 1);
+
+}
