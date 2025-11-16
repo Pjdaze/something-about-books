@@ -129,7 +129,7 @@ export const BookshelfPage = () => {
                           const cover = getCoverUrl(book);
 
                           return (
-                            <button
+                            <div
                               key={book.key}
                               className="cb-book"
                               style={
@@ -151,7 +151,7 @@ export const BookshelfPage = () => {
                               >
                                 X
                               </button>
-                            </button>
+                            </div>
                           );
                         })}
                       </div>

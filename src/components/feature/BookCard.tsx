@@ -39,7 +39,11 @@ export const BookCard = ({
         <div
           className={`
         overflow-hidden rounded-lg 
-        ${viewMode === "list" ? "w-24 h-36" : "w-full aspect-2/3 max-h-[250px]"}
+        ${
+          viewMode === "list"
+            ? "w-[200px]  h-36"
+            : "w-full aspect-2/3 max-h-[250px]"
+        }
       `}
         >
           <img
@@ -59,8 +63,8 @@ export const BookCard = ({
               {book.title}
             </h3>
 
-            <p className="text-sm text-gray-600 mb-2 italic line-clamp-1">
-              By {authors}
+            <p className="text-sm text-wrap text-gray-600 mb-2 italic line-clamp-1">
+              By {authors.length > 20 ? `${authors.slice(0, 20)}...` : authors}
             </p>
 
             <p className="text-xs text-gray-500">
