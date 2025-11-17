@@ -1,8 +1,6 @@
-// src/utils/sortBooks.ts
 import type { Book } from "../types/Book";
 import type { SortKey, SortDirection } from "../types/Sort";
 
-// Normalize strings so sorting is consistent
 const normalize = (value?: string | null): string => value?.toLowerCase() ?? "";
 
 export function sortBooks(
@@ -10,7 +8,7 @@ export function sortBooks(
   key: SortKey,
   direction: SortDirection
 ): Book[] {
-  const sorted = [...books]; // Don't mutate original list
+  const sorted = [...books];
 
   sorted.sort((a, b) => {
     switch (key) {

@@ -65,7 +65,7 @@ export const BookshelfPage = () => {
       </h1>
 
       {books.length > 0 && (
-        <div className="flex items-center justify-end mb-4 gap-2">
+        <div className="flex justify-center items-center  mb-4 gap-2">
           <button
             onClick={() => setViewMode("grid")}
             className={`px-3 py-1 rounded ${
@@ -86,9 +86,9 @@ export const BookshelfPage = () => {
           >
             List View
           </button>
-          <SortDropdown />
         </div>
       )}
+      <SortDropdown />
 
       {books.length === 0 ? (
         <div className="text-center py-20 ">
