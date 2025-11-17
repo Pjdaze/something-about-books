@@ -8,16 +8,19 @@ import { BrowserRouter } from "react-router-dom";
 import { BookshelfProvider } from "./context/BookshelfContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { ViewModeProvider } from "./context/ViewModeContext.tsx";
+import { SortProvider } from "./context/SortContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <BookshelfProvider>
-          <ViewModeProvider>
-            <App />
-          </ViewModeProvider>
-        </BookshelfProvider>
+        <SortProvider>
+          <BookshelfProvider>
+            <ViewModeProvider>
+              <App />
+            </ViewModeProvider>
+          </BookshelfProvider>
+        </SortProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>

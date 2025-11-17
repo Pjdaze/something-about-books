@@ -6,6 +6,10 @@ import { BookDetailsModal } from "../../components/ui/BookDetailsModal";
 import { type Book } from "../../types/Book";
 import { useViewMode } from "../../context/ViewModeContext";
 import { getCoverImageUrl } from "../../api/openLibrary";
+import { useSort } from "../../context/SortContext";
+import { sortBooks } from "../../utils/sortBooks";
+import { SortDropdown } from "../../components/ui/SortDropdown";
+
 import "./coolBookshelf.css";
 
 const BOOKS_PER_SHELF = 5;
@@ -16,6 +20,8 @@ export const BookshelfPage = () => {
   const { viewMode, setViewMode } = useViewMode();
   const [searchParams, setSearchParams] = useSearchParams();
   const bookKeyFromUrl = searchParams.get("book");
+  const { sortKey, sortDirection } = useSort();
+  const sortedBooks = sortBooks(books, sortKey, sortDirection);
 
   useEffect(() => {
     if (bookKeyFromUrl) setSelectedBookKey(bookKeyFromUrl);
@@ -41,7 +47,7 @@ export const BookshelfPage = () => {
   };
 
   // Calculate how many shelves are needed. Ensure at least one shelf.
-  const shelfCount = Math.ceil(books.length / BOOKS_PER_SHELF) || 1;
+  const shelfCount = Math.ceil(sortedBooks.length / BOOKS_PER_SHELF) || 1;
   const shelves = Array.from({ length: shelfCount }, (_, i) => i);
 
   // NOTE: using custom css for the bookshelf temporary solution
@@ -80,6 +86,7 @@ export const BookshelfPage = () => {
           >
             List View
           </button>
+          <SortDropdown />
         </div>
       )}
 
@@ -97,7 +104,7 @@ export const BookshelfPage = () => {
           {viewMode === "list" && (
             // List View uses existing BookCard component for list
             <div className="flex flex-col gap-4">
-              {books.map((book) => (
+              {sortedBooks.map((book) => (
                 <BookCard
                   key={book.key}
                   book={book}
@@ -117,7 +124,7 @@ export const BookshelfPage = () => {
                   // Determine the slice of books for this shelf
                   const start = shelfIndex * BOOKS_PER_SHELF;
                   const end = start + BOOKS_PER_SHELF;
-                  const booksOnShelf = books.slice(start, end);
+                  const booksOnShelf = sortedBooks.slice(start, end);
 
                   return (
                     <div key={shelfIndex} className="cb-shelf-layer">

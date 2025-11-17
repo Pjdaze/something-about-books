@@ -26,11 +26,11 @@ export const BookshelfToggle: React.FC<BookshelfToggleProps> = ({ book }) => {
       aria-pressed={isOnShelf}
       className={`
     px-3 py-1.5 text-sm font-medium
-    rounded-md text-white
+    rounded-md text-gray-700
     transition
     ${
       isOnShelf
-        ? "bg-red-500 hover:bg-red-600"
+        ? "bg-transparent dark:text-white  border dark:border-red-800 hover:bg-red-400 hover:text-red-800"
         : "bg-green-500 hover:bg-green-600"
     }
   `}
