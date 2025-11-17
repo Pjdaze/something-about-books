@@ -24,7 +24,7 @@ export const BookCard = ({
     <div
       className={`
 
-    dark:bg-transparent border border-gray-600  rounded-lg overflow-hidden transition: ;
+    dark:bg-transparent shadow-md  rounded-lg overflow-hidden transition: ;
     hover:shadow-lg hover:scale-[1.02]
     focus-within:ring-2 focus-within:ring-blue-500
     ${viewMode === "list" ? "flex border-0" : "flex flex-col h-[420px]"}

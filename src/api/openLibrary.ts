@@ -3,14 +3,6 @@ import { type OpenLibrarySearchResponse, type Book, type DetailedBook } from '..
 export const SEARCH_API_URL = 'https://openlibrary.org/search.json';
 export const DETAIL_API_BASE_URL = 'https://openlibrary.org';
 
-async function fetchWithUserAgent(url: string) {
-  return fetch(url, {
-    headers: {
-      "User-Agent": 'something-about-books-app/1.0 (pjdazeux@gmail.com)'
-    }
-  });
-}
-
 // Search
 export async function searchBooks(query: string, limit: number = 20): Promise<Book[]> {
   if (!query) return [];
@@ -18,7 +10,7 @@ export async function searchBooks(query: string, limit: number = 20): Promise<Bo
   const url = `${SEARCH_API_URL}?q=${encodeURIComponent(query)}&limit=${limit}`;
 
   try {
-    const response = await fetchWithUserAgent(url);
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP Error: Failed to fetch books for query "${query}". Status: ${response.status}`);
     }
@@ -46,7 +38,7 @@ export async function fetchBookDetails(
   const url = `${DETAIL_API_BASE_URL}${workKey}.json`;
 
   try {
-    const response = await fetchWithUserAgent(url);
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(
         `HTTP Error: Failed to fetch details for key "${workKey}". Status: ${response.status}`
@@ -63,7 +55,7 @@ export async function fetchBookDetails(
       authors = await Promise.all(
         data.authors.map(async (a: any) => {
           try {
-            const authorRes = await fetchWithUserAgent(`${DETAIL_API_BASE_URL}${a.author.key}.json`);
+            const authorRes = await fetch(`${DETAIL_API_BASE_URL}${a.author.key}.json`);
             const authorData = await authorRes.json();
             return { name: authorData.name || "Unknown Author" };
           } catch {
@@ -73,11 +65,18 @@ export async function fetchBookDetails(
       );
     }
 
+    let description: string | undefined = undefined;
+
+     if (typeof data.description === "string") {
+       description = data.description;
+     } else if (data.description?.value ) {
+       description = data.description.value;
+     }
+
     return {
       title: data.title || "Untitled",
       authors,
-      subjects: data.subjects,
-      description: data.description,
+      subjects: data.subjects, description
     };
   } catch (error) {
     console.error("API Detail Error:", error);

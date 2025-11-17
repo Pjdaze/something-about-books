@@ -52,7 +52,7 @@ export const BookshelfPage = () => {
         viewMode === "grid" ? "cb-root" : ""
       }`}
     >
-      <h1 className="text-3xl font-bold mb-6 text-gray-800 dark:text-gray-200">
+      <h1 className="text-[1.6rem] text-center font-bold mb-6 text-gray-800 dark:text-gray-200">
         {`You've Got ${books.length} ${
           books.length !== 1 ? "Books" : "Book"
         } in your Bookshelf`}
@@ -84,7 +84,7 @@ export const BookshelfPage = () => {
       )}
 
       {books.length === 0 ? (
-        <div className="text-center py-20 bg-white dark:bg-slate-800 rounded-lg shadow-md dark:shadow-xl">
+        <div className="text-center py-20 ">
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">
             Your bookshelf is empty!
           </p>
@@ -96,7 +96,7 @@ export const BookshelfPage = () => {
         <>
           {viewMode === "list" && (
             // List View uses existing BookCard component for list
-            <div className="flex lg:w-1/2 flex-col gap-4">
+            <div className="flex flex-col gap-4">
               {books.map((book) => (
                 <BookCard
                   key={book.key}
@@ -121,7 +121,6 @@ export const BookshelfPage = () => {
 
                   return (
                     <div key={shelfIndex} className="cb-shelf-layer">
-                      {/* The static bookshelf element */}
                       <div className="cb-bookshelf" aria-hidden="true" />
 
                       <div className="cb-books">
@@ -136,7 +135,7 @@ export const BookshelfPage = () => {
                                 {
                                   "--bg-image": cover
                                     ? `url('${cover}')`
-                                    : `url('https://placehold.co/115x180/f3f3f3/aaa?text=No+Cover')`,
+                                    : `url('https://placehold.co/115x180/f3f3f3/aaa?text=${book.title.toUpperCase()}')`,
                                 } as React.CSSProperties
                               }
                               onClick={() => handleViewDetails(book)}
