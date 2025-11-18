@@ -35,13 +35,13 @@ export const BookCard = ({
           viewMode === "list" ? "gap-4" : "flex-col"
         }`}
       >
-        {/* Cover Image */}
         <div
+          onClick={onViewDetails}
           className={`
         overflow-hidden rounded-lg 
         ${
           viewMode === "list"
-            ? "w-[200px]  h-36"
+            ? "min-w-[150px]  h-36"
             : "w-full aspect-2/3 max-h-[250px]"
         }
       `}
@@ -78,7 +78,7 @@ export const BookCard = ({
 
             <button
               onClick={onViewDetails}
-              className="bg-blue-500 dark:bg-orange-500 hover:dark:bg-transparent dark:border dark:border-amber-600 hover:dark:border-amber-600  px-3 py-1 
+              className="hidden md:block bg-blue-500 dark:bg-orange-500 hover:dark:bg-transparent dark:border dark:border-amber-600 hover:dark:border-amber-600  px-3 py-1 
           text-white rounded focus:outline-none focus:ring-2 
           focus:ring-blue-500"
               aria-label={`View details for "${book.title}"`}
